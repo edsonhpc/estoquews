@@ -13,6 +13,15 @@ import br.com.caelum.estoque.modelo.item.Item;
 import br.com.caelum.estoque.modelo.item.ItemDao;
 import br.com.caelum.estoque.modelo.item.ListaItens;
 
+/***
+ * 
+ * @author Edson Cavalcanti
+ * - Classe que representa a implementação do serviço web;
+ * - @WebService essa anotação indica a criação do serviço e ao chamar  o método devemos usar o HTTP e XML;
+ *  
+ *
+ */
+
 @WebService
 public class EstoqueWS {
 
