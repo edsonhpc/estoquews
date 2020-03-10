@@ -1,5 +1,11 @@
 package br.com.caelum.estoque.modelo.item;
 
+/**
+ * 
+ * @author Edson Cavalcanti
+ * - Essa classe filtro define o tipo do item (Livro, Celular ou Tablet) e o nome do item
+ *
+ */
 
 public class Filtro {
 

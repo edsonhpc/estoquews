@@ -7,6 +7,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+/**
+ * 
+ * @author Edson Cavalcanti
+ * - Essa classe filtros é um pequeno wrapper para embrulhar um filtro e deixar o XML mais expressivo
+ *
+ */
+
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Filtros {

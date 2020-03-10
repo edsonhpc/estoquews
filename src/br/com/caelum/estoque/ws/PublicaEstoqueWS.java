@@ -20,7 +20,7 @@ public class PublicaEstoqueWS {
 	public static void main(String[] args) {
 		
 		EstoqueWS implementacaoWS = new EstoqueWS();
-		String URL = "http://localhost:8090/estoquews";
+		String URL = "http://localhost:8050/estoquews";
 		
 		System.out.println("EstoqueWS rodando: " + URL +"?wsdl"  );
 		
