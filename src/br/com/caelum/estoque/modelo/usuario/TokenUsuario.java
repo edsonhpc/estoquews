@@ -2,9 +2,28 @@ package br.com.caelum.estoque.modelo.usuario;
 
 import java.util.Date;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
+
+import br.com.caelum.estoque.ws.DateAdapter;
+
+
+/**
+ * 
+ * @author edson.h.cavalcanti
+ * - @XmlAccessorType e @XmlElement são da especificação JAX-B que é utilizado pelo JAX-WS para gerar e ler o XSD/XML
+ */
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class TokenUsuario {
 
+	@XmlElement(required = true) // Tornando o atributo obrigatório no serviço SOAP
 	private String token;
+	
+	@XmlJavaTypeAdapter(DateAdapter.class) // Anotação para utilizar a nossa classe de Adpter para formatação da Data String ou Date.
+	@XmlElement(required = true) 
 	private Date dataValidade;
 	
 	//JAX-B precisa desse construtor

@@ -15,7 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  * - @XmlElement serve para redifinir o nome do elemento no XML (entre outras funções);
  */
 
-@XmlRootElement
+@XmlRootElement()
 @XmlAccessorType(XmlAccessType.FIELD) // Reconfiguração será feito direto pelos atributos e não pelos gets e sets que é o padrão do JAX-B
 public class ListaItens {            // Fazendo dessa forma eu não preciso gerar um getter e um setter para serialização do JAX-B
 
