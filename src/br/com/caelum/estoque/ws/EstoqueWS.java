@@ -39,6 +39,15 @@ import br.com.caelum.estoque.modelo.usuario.TokenUsuario;
  *   - Um outro poderia fazer uma auditoria para logar informações importantes do está sendo feito.
  *   - Esses intermediários o que são chamados de nó.
  *   - Cliente SOAP (sender) <->  SOAP NODE <-> SOAP NODE <-> Servidor SOAP (receiver)    
+ *   
+ *   
+ * - @Oneway
+ * 	 - Quando criamos um serviço SOAP estamos seguindo o padrão de requisição e resposta, o serviço recebe a requisição e o cliente aguarda seu processamento para receber uma resposta.
+ *   - Em alguns casos não precisamos receber nenhuma resposta do serviço, apenas queremos enviar uma informação ex: e-mail de notificação, um relatório pdf.
+ *   - Neste caso dizemos que queremos criar um serviço de mão única deixando claro para os clientes que não terá resposta.
+ *   - Fazemos isso criando um retorno do tipo void e usando a anotação @Oneway.  
+ *   - Dessa forma não teremos mais uma mensagem de saída, ja que o serviço deixa de ter resposta.
+ *   
  */
 
 @WebService

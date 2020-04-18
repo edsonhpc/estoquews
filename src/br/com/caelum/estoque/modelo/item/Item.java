@@ -5,6 +5,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
+/**
+ * 
+ * @author edson.h.cavalcanti
+ * - @XmlRootElement é uma anotação do JAX-b para permitirmos que ele possa ler ou escrever  conteúdo XML a partir da nossa classe.
+ * 
+ */
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.FIELD)
 public class Item {

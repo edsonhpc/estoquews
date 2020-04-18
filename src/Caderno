@@ -1,0 +1,34 @@
+Gerando o WSDL a partir de uma implementação, é necessário estar com o JDK instalado.
+- No terminal entrar na pasta principal do projeto.
+
+-> wsgen -wsdl -cp bin br.com.caelum.estoque.ws.EstoqueWS
+-> wsgen -wsdl -inlineSchemes -cp bin br.com.caelum.estoque.ws.EstoqueWS
+
+- -wsdl é para gerar o arquivo WSDL e o -cp para definir o local das classes compiladas.
+
+
+Qual o papel do XSD na definição do serviço?
+- O XSD ou Xml Schema descreve a estrutura de um documento XML, ele é quem define como se compor
+uma mensagem SOAP, o que pode aparecer no XML, quantas vezes, quais tipos, nomenclaturas etic.
+
+O que as mensagens no WSDL representam?
+- Cada mensagem representa uma entrada ou saída, ou seja o elemento message descreve os dados a serem
+trocados entre cliente e servidor, dentro desse elemento vem os part que associam um tipo concreto do xsd.
+
+Quais elementos fazem parte do WSDL abstrato?
+- <types>, <message>, <portTypes> assim que temos os elementos <binding> e <service> o WSDL se torna concreto.
+- Concreto significa que há informações sobre encoding, sobre o protocolo e endereço do serviço.
+
+1) <types>: são aquelas definições do XSD, podemos dizer que tudo o que está sendo trafegando dentro de uma mensagem SOAP deve estar declarado de alguma forma no XSD.
+            em geral qualquer serviço expôe um modelo, e no mundo SOAP este modelo está definido no XSD.
+
+2) <message>: as mensagens de baseiam no XSD e cada uma representa uma entrada ou saída do serviço.
+
+3) <portType>: esta seção associa a mensagem a uma operação, o que importa aqui é o atributo message nele temos uma referencia a mensagem.
+              é também chamado de interface dentro de um WSDL.
+
+--- As definições concretas aparecem na segunda parte do WSDL.
+
+Qual é a responsabilidade do elemento <portType>?
+- Definir as operações de input e output, ele é parecido com uma interface java, com ele podemos ter várias
+operation 's e para ser correto nem sempre uma operação precisa ter entrada E saída.
