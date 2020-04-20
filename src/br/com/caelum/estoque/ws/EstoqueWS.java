@@ -6,6 +6,9 @@ import javax.jws.WebMethod;
 import javax.jws.WebParam;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import javax.jws.soap.SOAPBinding;
+import javax.jws.soap.SOAPBinding.ParameterStyle;
+import javax.jws.soap.SOAPBinding.Style;
 import javax.xml.ws.RequestWrapper;
 import javax.xml.ws.ResponseWrapper;
 
@@ -51,6 +54,9 @@ import br.com.caelum.estoque.modelo.usuario.TokenUsuario;
  */
 
 @WebService
+//@SOAPBinding(style = Style.DOCUMENT)
+@SOAPBinding(style=Style.DOCUMENT, parameterStyle= ParameterStyle.BARE) // Fazemos a entrega do serviço sem ter o conhecimento do método que foi chamado.
+//@SOAPBinding(style=Style.DOCUMENT, parameterStyle= ParameterStyle.WRAPPED) // Não é necessário anotar visto que é o padrão de comunicação.
 public class EstoqueWS {
 
 	private ItemDao dao = new ItemDao();
@@ -70,7 +76,7 @@ public class EstoqueWS {
 		return new ListaItens(itensResultado);
 	}
 	
-	@WebMethod(operationName = "CadastrarItem")
+	@WebMethod(action = "CadastrarItem" , operationName = "CadastrarItem")
 	@WebResult(name = "item")
 	public Item cadastrarItem(@WebParam(name="tokenUsuario" , header = true) TokenUsuario token, @WebParam(name = "item") Item item) throws AutorizacaoException {
 		
@@ -85,6 +91,13 @@ public class EstoqueWS {
 		new ItemValidador(item).validate();
 		
 		this.dao.cadastrar(item);
+		
+		return item;
+	}
+	
+	@WebMethod(operationName = "CadastrarItem2")
+	@WebResult(name = "item")
+	public Item cadastrarItem2(@WebParam(name="tokenUsuario" , header = true) TokenUsuario token, @WebParam(name = "item") Item item) throws AutorizacaoException {
 		
 		return item;
 	}

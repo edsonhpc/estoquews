@@ -1,3 +1,6 @@
+--------------------------------------------------------------------------------------------------------------------------------
+Class-04 | WSDL Concreto e Abstrato
+--------------------------------------------------------------------------------------------------------------------------------
 Gerando o WSDL a partir de uma implementação, é necessário estar com o JDK instalado.
 - No terminal entrar na pasta principal do projeto.
 
@@ -32,3 +35,68 @@ Quais elementos fazem parte do WSDL abstrato?
 Qual é a responsabilidade do elemento <portType>?
 - Definir as operações de input e output, ele é parecido com uma interface java, com ele podemos ter várias
 operation 's e para ser correto nem sempre uma operação precisa ter entrada E saída.
+
+-----------------------------------------------------------------------------------------------------------------------------
+Class-05 | Entendendo os estilos Document e RPC
+----------------------------------------------------------------------------------------------------------------------------
+
+Document=Somente envia os dados
+O style=document: quando na mensagem soap aparecem informações sobre os dados.
+Esse método Document é usado simplesmente para passar uma informação, sem dizer explicitamente qual método será chamado no servidor.
+
+RPC=Remote Procedure Call / Chamada Remota de um Procedimento
+O style=rpc     : aparece o nome do método na mensagem soap;
+-- Esse estilo foi projetado para permitir que as operações possam ser chamadas como métodos Java tradicionais, o problema é que a definição de cada método
+ficará no WSDL, gerando acoplamento.
+-- Ao expor serviços dessa maneira muitas vezes o XML fica muito amarrado a aplicação. Isso pode gerar uma acoplamento forte e criar problemas de compatibilidade que dificulta a integração heterogênea. 
+-- Na realidade, isso significava que muitos vezes um cliente não conseguia se comunicar com um serviço por causa do RPC,
+
+[Document/Wrapped]
+-- Para não gerar problemas de compatibilidade, a grande maioria dos serviços usa hoje em dia o estilo Document. 
+-- O grande problema do Document é que não havia uma forma padrão para fazer RPC! Felizmente isso mudou, como vocês já viram podemos usar o estilo Document para fazer uma chamada remota de um método. 
+-- Basta embrulhar o documento em um elemento XML como mesmo nome do método! Esse forma se chama de Document/Wrapped. 
+-- Ou seja, usamos o tempo todo Document/Wrapped para fazer RPC, ok?
+
+[SOAPAction] 
+ -- Esse SOAPAction foi criado para mensagens do tipo Document que querem definir o método a ser chamado fora do XML.
+
+Codificação Literal: não preciso enviar os tipos.
+
+Codificação Encoded: necessário informar os tipos de dados.
+-- Nesse tipo de codificação a mensagem SOAP também trafega os tipos de dados.
+-- O File e Database são estilos de integração mas fora do contexto soap.
+-- Esse estilo traz a facilidade de leitura e como consequência alguns problemas de compatibilidade, validação e desempenho.
+-- Segundo a WS-I(Web Services Interoperability Organization) deve-se usar apenas os estilos Document/Literal e RPC/Literal. O Jax-ws foi projetado para seguir essa limitação.
+
+
+Codificação Wrapped e Bare não definem os tipos que seão codificados, elas são configurações utilizadas pelo JAX-WS em conjunto com Document para dizer que queremos embrulhar a mensagem ou não.
+
+
+-- style=rpc/encoded: visível o nome do método e também possui os tipos codificados.
+
+-- Ao codificar usando estilo RPC nosso serviço possui um ato-acoplamento com código Java, para evitar problemas de compatibilidade que geram
+problemas de integração, usamos o estilo Document/Literal Wrapped Pattern;
+
+-- O estilo Document é usado para simplemente passar uma informação enquanto RPC foi pensado para chamar uma operação remota, uma alternativa ao RPC é o padrão Document/Wrapped.
+
+O elemento <binding> realiza uma ligação entre o elemento <service>(que define o endereço e o protocolo do serviço) e o elemento <portType> (que define a interface), além de definir detalhes sobre a
+mensagem SOAP (no elemento <operation>), em WSDL abastrato somente definimos a interface, o que é suficiente para implementação do serviço, deixamos detalhes a respeito do formato da mensagem
+e de como ela deve ser entregue a cargo do WSDL concreto.
+
+[Elemento Service]
+Define duas coisas: o binding utilizado e o endereço concreto para chamar serviço SOAP.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

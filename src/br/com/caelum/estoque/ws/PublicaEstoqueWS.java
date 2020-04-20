@@ -12,7 +12,8 @@ import javax.xml.ws.Endpoint;
  * - Na criação do serviço usando o SoapUI irá interpretar o WSDL e vai gerar um cliente que sabe usar o nosso serviço;
  * - Url: ttp://localhost:8090/estoquews?wsdl
  * - Ao confirmar a requisição SOAP, é feito uma requisição HTTP POST que envia XML, esse XML é a mensagem SOAP;
- * - 
+ * - Definições WSDL
+ *   Tipos -> Mensagens -> Operações -> Protocolo das Operações -> Endereço das Operações
  */
 
 public class PublicaEstoqueWS {
