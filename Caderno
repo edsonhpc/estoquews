@@ -1,0 +1,36 @@
+- Gerando as classes a partir de um WDSL.
+1) Entrar na pasta de instalação do wildfly
+- c:\APP\wildfly-8.1.0.Final\bin
+
+2) Com o comando abaixo passamos o diretório onde queremos gerar as classes e o dirtório onde o wsdl é feito a leitura.
+- wsconsume.bat -k -n -o c:\workspace\backend\estoque-web\src  c:\workspace\backend\estoque-web\src\EstoqueWSServiceCap5.wsdl
+
+O script wsconsume é apenas um wrapper pra simplificar o uso da ferramenta wsdl2java que faz parte de implementação CXF que 
+vem embutida no wildfly (CXF é uma implementação da especificação JAX-WS). As classes geradas podem ser utilizadas para publicar o serviço ou criar o cliente.
+
+-- Contract first vs Contract last
+
+1) Contract First
+- Gera o serviço a partir de um WSDL;
+- Pode ser usado quando já temos um serviço exposto e queremos migrá-lo para outra linguagem/platadorma ou quando estiver com um WSDL do zero;
+- Equipes diferentes podem trabalhar enquanto uma atua na implementação a outra pode atuar no cliente;
+- Isso ocorre pois o contrato (wsdl) está definido os dois lados e estão desacoplados;
+- A definição do serviço é mais clara, como não estamos escrevendo alguma implementação o foco é o contrato e seus detalhes.
+- A api exposta é sempre o wdsl e seus tipos (schemas) ambos documentos devem ser legíveis e bem escritos, a implementação é apenas um detalhe.
+---Como desvantagem podemos notar que é preciso conhecer bem as especificações relacionadas aos Web Services que são os WSDL e XSD, em geral
+é preciso dominar o mundo XML. Com o contract first não basta conhecer algumas anotações simples e gerar as classes.
+
+2) Contract Last
+- Gera o WSDL a partir de uma classe Java, ou seja implementar primeiro o serviço (e o resto é gerado);
+- É bem mais simples pois abstrai todo mundo SOAP/WSDL pois o WSDL e XSD são gerados;
+
+-- Implementações do JAX-WS
+1) Metro: essa implementação vem junto com o JRE / https://javaee.github.io/metro/
+
+2) CFX: é bem popular e vem embutida no servidor Jboss Wildfly, no entanto pode ser usada no Tomcat e entros servlets. http://cxf.apache.org/
+- Essa implementação do CFX é um Service Framework que atende ambos REST e SOAP, sendo que para o REST segue a especificação JAX-RS e SOAP segue JAX-WS.
+
+3) Axis2: implementação mantida pela Apache. http://axis.apache.org/axis2/java/core/index.html
+
+
+
