@@ -1,0 +1,34 @@
+- Gerando um cliente java a partir de um WSDL
+
+1) No terminal na pasta do projeto executar o comando wsimport que vem junto com o jre
+- wsimport -s src -p br.com.caleum.estoque.cliente http://localhost:8080/estoque-web/EstoqueWS?wsdl
+
+- o Comando acima deve gerar todas as classes.
+
+2) Gerando o wsimport em ambiente que usa https e autenticação LDAP.
+
+- wsimport -keep -d <DirectoryName> -verbose -Xnocompile -Xauthfile authFile.txt <WSDL_URL>
+
+ARQUIVO: authFile.txt  http://username:password@hostname/path?WSDL
+
+-------------------
+
+wsimport e wsdl2java são ferramentas de linha de comando para gerar as classes java a partir do wsdl, as classes geradas ajudam a escrever
+programas no lado do cliente ou servidor para serviços web e abstraim todo o trabalho com soap e http em geral. Essas classes também são 
+chamadas de "stubs de cliente" ou "esqueletos de servidores".
+
+
+----- Gerando wsimpor protocolo https
+- Chamo a classe java wsimport(origem) e adiciono os argumentos necessários da jvm sabendo onde procurar os certificados.
+
+wsimport -s src -p br.com.caelum.estoque.cliente    https://localhost:8080/estoque/EstoqueWS?wsdl
+
+java -classpath C:\jdk160_29\lib\tools.jar -Djavax.net.ssl.trustStore=c:\jdk160_29\.mykeystore com.sun.tools.internal.ws.WsImport https://localhost:8080/estoque/EstoqueWS?wsdl -p com.test -s ./src"
+
+
+----- Service ws download de arquivos
+SOAP MTOM (Message Transmission Optimaztion Mechamism) que possibilita enviar dados binários em web serviçes.
+
+https://www.mkyong.com/webservices/jax-ws/jax-ws-attachment-with-mtom/
+
+
